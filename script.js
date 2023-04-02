@@ -1,12 +1,17 @@
 "use strict";
 
-
+window.addEventListener("DOMContentLoaded", () => {
+	document.querySelector("body").style.paddingTop = "70px";
+	document.querySelector("body").style.paddingBottom = "140px";
+});
 
 window.addEventListener("resize", () => {
     const ratio = 1536 / parseInt(window.innerWidth);
     // document.querySelector("#Brand").style.fontSize = (28 * ratio) + 'px';
     document.querySelector("header").style.height = ratio * 60 + 'px';
     document.querySelector("header").style.lineHeight = 1.5 + "em";
+	document.querySelector("#main").style.paddingTop = document.querySelector("header").style.height;
+	document.querySelector("#main").style.paddingBottom = document.querySelector("footer").style.height;
 });
 
 document.querySelector("#phone").addEventListener('click', () => {
@@ -60,6 +65,10 @@ document.querySelector("#facebook").addEventListener('click', () => {
 });
 
 
-document.querySelector("#next").addEventListener('click', () => {
-        window.location.href = "base plan 2.html";
+document.querySelector("#parking").addEventListener('click', () => {
+        window.location.href = "parking.html";
+});
+
+document.querySelector("#ground_floor").addEventListener('click', () => {
+        window.location.href = "ground_floor.html";
 });
