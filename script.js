@@ -1,10 +1,12 @@
 "use strict";
 
 
-// window.addEventListener("resize", () => {
-//     const ratio = parseInt(window.innerWidth) / 1536;
-//     document.querySelector("#Brand").style.fontSize = (28 * ratio) + 'px';
-// });
+window.addEventListener("resize", () => {
+    const ratio = 1536 / parseInt(window.innerWidth);
+    // document.querySelector("#Brand").style.fontSize = (28 * ratio) + 'px';
+    document.querySelector("header").style.height = ratio * 60 + 'px';
+    document.querySelector("header").style.lineHeight = 1.5 + "em";
+});
 
 document.querySelector("#phone").addEventListener('click', () => {
     const phone = "+30-210-1234567";
