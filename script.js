@@ -1,6 +1,7 @@
 "use strict";
 
 
+
 window.addEventListener("resize", () => {
     const ratio = 1536 / parseInt(window.innerWidth);
     // document.querySelector("#Brand").style.fontSize = (28 * ratio) + 'px';
@@ -56,4 +57,9 @@ document.querySelector("#facebook").addEventListener('click', () => {
         }
     }).showToast();
 
+});
+
+
+document.querySelector("#next").addEventListener('click', () => {
+        window.location.href = "base plan 2.html";
 });
