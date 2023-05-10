@@ -1,0 +1,100 @@
+/*
+#Form{
+	padding-left: 60px;
+} */
+
+html{
+  font-size: 12px;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font: 1.8em / 1.8 Arial, Helvetica, sans-serif
+}
+
+header {
+  display: flex;
+  flex-wrap: nowrap;
+  background-color: #3f454f;
+  position: fixed;
+  height: 70px;
+  width: 100%;
+  align-items: center;
+}
+
+#Logo {
+  height: 100px;
+  width: 100px;
+  border-radius: 10px;
+  box-shadow: 0 2px 2px rgba(0,0,0,0.3);
+  margin-top: 20px;
+  /* margin-left: 20px; */
+}
+
+#Logo img {
+  height: inherit;
+  width: inherit;
+  border-radius: inherit;
+}
+
+#Brand {
+  color: #ffffff;
+  line-height: 1em;
+  font-weight: bolder;
+  font-size: 25px;
+  margin-right: 50px;
+
+  text-justify: inter-character;
+  text-align-last: justify;
+}
+
+#Title_Text{
+  display: block;
+  color: #ff8e4c;
+  align-self: center;
+  font-size: 30px;
+	font-weight: bold;
+}
+
+#main{
+  display: flex;
+  justify-content: right;
+} 
+
+
+#main img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+}
+
+
+footer {
+  background-color: #f2f2f2;
+  text-align: center;
+}
+
+footer p {
+  margin-top: 0;
+}
+
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav li {
+  display: inline-block;
+  margin: 0 10px;
+}
+
+nav img{
+  width: 80px;
+  height: 80px;
+}
+
+
+
+

@@ -5,7 +5,9 @@ html{
 body {
   margin: 0;
   padding: 0;
-  font: 1.8em / 1.8 Arial, Helvetica, sans-serif
+  font: 1.8em / 1.8 Arial, Helvetica, sans-serif;
+  padding-top: 70px;
+  padding-bottom: 140px;
 }
 
 header {
@@ -17,6 +19,8 @@ header {
   height: 70px;
   width: 100%;
   align-items: center;
+  z-index: 10;
+  line-height: 1.5em;
 }
 
 #Logo {
@@ -36,8 +40,6 @@ header {
 
 #Brand {
 	color: #ffffff;
-	/* display: flex; */
-	/* flex-wrap: wrap; */
 	line-height: 1em;
 	font-weight: bolder;
 	font-size: 25px;
@@ -57,17 +59,34 @@ header {
 
 #main{
 	display: flex;
-	justify-content: right;
+	justify-content: center;
+	position: relative;
 }
 
-#test_next{
+#building {
+	width: auto;
+	height: auto;
+	max-width: 100%;
+	z-index: 1;
+}
+
+.marker {
+	position: absolute;
+	z-index: 2;
+	width: 70px;
+	height: 70px;
+}
+
+
+
+/* #test_next{
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	color: black;
 	font-size: 40px;
 	height: 1000px;
-}
+} */
 
 
 
@@ -79,6 +98,7 @@ footer {
 	bottom: 0;
 	height: 140px;
 	width: 100%;
+	z-index: 10;
 }
 
 nav ul {
