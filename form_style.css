@@ -1,8 +1,7 @@
-html{
-  font-size: 12px;
-}
-
 body {
+	justify-content: center;
+	align-content: center;
+  display: flex;
   margin: 0;
   padding: 0;
   font: 1.8em / 1.8 Arial, Helvetica, sans-serif;
@@ -17,12 +16,22 @@ header {
   background-color: #3f454f;
   position: fixed;
   top: 0;
-  height: 70px;
+  height: 75px;
   width: 100%;
-  align-items: center;
   align-items: center;
   z-index: 10;
   line-height: 1.5em;
+}
+
+footer {
+	font-size: 15px;
+	background-color: #f2f2f2;
+	text-align: center;
+	position: fixed;
+	bottom: 0;
+	height: 140px;
+	width: 100%;
+	z-index: 10;
 }
 
 #Logo {
@@ -31,7 +40,7 @@ header {
 	border-radius: 10px;
 	box-shadow: 0 2px 2px rgba(0,0,0,0.3);
 	margin-top: 20px;
-	margin-right: 10px;
+	margin-right: 10px; 
 }
 
 #Logo img {
@@ -59,34 +68,53 @@ header {
 	font-weight: bold;
 }
 
-#main{
-	padding-top: 100px;
-	padding-right: 70px;
+#report_form {
 	display: flex;
+	flex-direction: column;
+	height: auto;
+	width: 50%;
 	justify-content: center;
-	position: relative;
+	align-content: center;
+	align-self: center;
+	color: white;
+	background-color: #747e90;
 }
 
-/* #test_next{
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	color: black;
-	font-size: 40px;
-	height: 1000px;
-} */
+h2 {
+	align-self: center;
+	margin: 0px;
+}
 
+#general_category {
+	font-size: 22px;
+	align-self: left;
+	margin-left: 20px;
+}
 
-
-footer {
-	font-size: 15px;
-	background-color: #f2f2f2;
+#problem_type {
 	text-align: center;
-	position: fixed;
-	bottom: 0;
-	height: 140px;
-	width: 100%;
-	z-index: 10;
+	border-radius: 5px;
+	background-color: #25282e;
+	outline-color: #25282e;
+	width: 150px;
+	height: 35px;
+	font-size: 20px;
+	color: white;
+}
+
+#radio_label {
+	margin-left: 20px;
+	font-size: 22px;
+}
+
+.radio {
+	cursor: pointer;
+	margin-left: 60px;
+	accent-color: #ff8e4c;
+}
+
+#specialized_problem {
+	font-size: 19px;
 }
 
 nav ul {
