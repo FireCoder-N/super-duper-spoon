@@ -1,0 +1,26 @@
+<div id="login-box">
+    <h2>Έλεγχος εισόδου</h2>
+    <form id="login-form">
+        <div id="user-select">
+            <label for="user-select">Εισέρχεστε ως:</label>
+            <select id="user-type">
+                <option selected="selected" value="level-1">Επισκέπτης</option>
+                <option value="level-2">Υπάλληλος</option>
+                <option value="level-3">Διαχειριστής</option>
+            </select>
+        </div>
+        <div id="login-field">
+            <label for="login-input">Login:</label>
+            <input type="text" id="login-input" name="login-input">
+        </div>
+        <div hidden="true" id="password-field">
+            <label for="password-input">Κωδικός:</label>
+            <input type="password" id="password-input" name="password-input">
+        </div>
+        <button type="submit" id="submit-button">Συνέχεια</button>
+    </form>
+</div>
+<div id="main">
+	<img src="images/building exterior.png" id="building">
+</div>
+<script src="login.js" defer></script>

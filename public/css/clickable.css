@@ -1,0 +1,10 @@
+.clickable {
+	position: absolute;
+	z-index: 2;
+	transform: translate(-50%, -50%);
+}
+
+.marker {
+	width: 70px;
+	height: 70px;
+}
