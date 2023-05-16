@@ -48,5 +48,4 @@ userType.addEventListener('change', () => {
 submitter.addEventListener("submit", (e)=>{
 	e.preventDefault();
 	window.location.href = "starting_page.html";
-	console.log("peos")
 })

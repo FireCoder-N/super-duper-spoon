@@ -5,7 +5,8 @@
 		<title>Υποβολή βλαβών</title>
 		<link rel="stylesheet" href="form_style.css">
 		<script src="form_script.js" defer></script>
-
+		<script src="script.js" defer></script>
+		
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 		<script src="https://cdn.jsdelivr.net/npm/toastify-js" defer></script>
 
@@ -32,18 +33,44 @@
 				<label for="problem_type" id="problem_type_label">
 					Παρακαλώ επιλέξτε κατηγορία προβλήματος:
 				</label>
-				<select id="problem_type">
-					<option selected="selected" value="electronics">Ηλεκτρολογικά</option>
-					<option value="plumbing">Υδραυλικά</option>
-					<option value="structural">Δομικά</option>
+				<select id="problem_type" autocomplete="off">
+					<option selected value="placeholder" id="plOption"></option>
+					<option value="electronics" id="eOption">Ηλεκτρολογικά</option>
+					<option value="plumbing" id="pOption">Υδραυλικά</option>
+					<option value="structural" id="sOption">Δομικά</option>
+					<option value="other" id="oOption">Άλλο</option>
 				</select>
 			</div>
 			<div id="specialized_problem" >
-				<div id="radio_label">
+				<div id="radio_label" hidden>
 					Επιλέξτε πιο συγκεκριμένο πρόβλημα:
 				</div>
 				<div id="gmtx">
 				</div>
+				<div id="other_description">
+					<textarea maxlength="50" cols="40" id="oth_inp" hidden placeholder="Παρακαλώ περιγράψτε  σύντομα το πρόβλημά σας.">
+					</textarea>
+				</div>
+			</div>
+			<div id="comments">
+				<textarea id="comment_box" hidden placeholder="Παρακαλώ προσθέστε άλλα σχόλια, αν υπάρχουν, εδώ.">
+				</textarea>
+			</div>
+			<div id="TaC">
+				<input type="checkbox" id="check"> </input>
+				Υποβάλλοντας την παρούσα δήλωση, αποδέχεστε τους 
+				<a href="terms.html">όρους απορρήτου</a>.
+			</div>
+			<div id="button_cont">
+			<button id="back" hidden>
+				Προηγούμενο
+			</button>
+			<button id="front">
+				Επόμενο
+			</button>
+			<button id="finish" hidden>
+				Υποβολή
+			</button>
 			</div>
 		</div>
 	</body>
