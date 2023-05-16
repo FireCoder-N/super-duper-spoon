@@ -1,13 +1,13 @@
 // Express.js
 import express from 'express'
+import session from 'express-session'
 // Handlebars (https://www.npmjs.com/package/express-handlebars)
 import { engine } from 'express-handlebars'
+import { loginController, checkAuth } from './LoginController.mjs'
 
 const app = express()
 const router = express.Router();
 const port = process.env.PORT || '3001';
-
-
 
 // Specify that the "public" folder will contain the static files
 app.use(express.static('public'))
@@ -18,14 +18,26 @@ app.set('view engine', 'hbs');
 
 
 // ---------------------------------------------
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json()); // Parse JSON in request body
+
+// session middleware
+app.use(session({
+    secret: 'your-secret-key',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false }
+}));
+
 app.use(router); // load the router
 app.use(notFound); // error 404-not found
-  
 
+// ---------------------------------------------
 // Define routes
 router.route('/').get(login);
-router.route('/floorplan').get(floorplan);
+router.route('/').post(loginController);
 router.route('/home').get(homepage);
+router.route('/floorplan').get(floorplan);
 
 // ---------------------------------------------
 // Define the route handlers

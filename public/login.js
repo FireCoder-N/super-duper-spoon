@@ -3,44 +3,44 @@ document.body.style.overflow = "hidden";
 document.body.style.height = "100 %";
 
 // Get DOM elements
-const userType = document.getElementById('user-type');
-const loginField = document.querySelector('#login-field');
-const passwordField = document.querySelector('#password-field');
-const submitter = document.querySelector('#login-form');
+const userType = document.getElementById('user_type');
+const loginField = document.querySelector('#login_field');
+const passwordField = document.querySelector('#password_field');
+const submitter = document.querySelector('#login_form');
 
-userType.value = 'level-1';
+userType.value = 'level_1';
 
 loginField.innerHTML = `
-    <label for="login-input">Ονοματεπώνυμο:</label>
-    <input type="text" id="login-input" name="login-input">
+    <label for="login_input">Ονοματεπώνυμο:</label>
+    <input type="text" id="login_input" name="login_input">
 `;
 
 // Add event listener to permission level dropdown
 userType.addEventListener('change', () => {
   // Show/hide login/password fields based on permission level
     switch (userType.value) {
-        case 'level-1':
+        case 'level_1':
             loginField.innerHTML = `
-                <label for="login-input">Ονοματεπώνυμο:</label>
-                <input type="text" id="login-input" name="login-input">
+                <label for="login_input">Ονοματεπώνυμο:</label>
+                <input type="text" id="login_input" name="login_input">
             `;
             passwordField.hidden = true;
             break;
-        case 'level-2':
+        case 'level_2':
             loginField.innerHTML = `
-                <label for="login-input">Αριθμός Μητρώου:</label>
-                <input type="text" id="login-input" name="login-input">
+                <label for="login_input">Αριθμός Μητρώου:</label>
+                <input type="text" id="login_input" name="login_input">
             `;
             passwordField.hidden = true;
             break;
-        case 'level-3':
+        case 'level_3':
             loginField.innerHTML = `
-                <label for="username-input">Αριθμός Μητρώου:</label>
-                <input type="text" id="username-input" name="username-input">
+                <label for="username_input">Αριθμός Μητρώου:</label>
+                <input type="text" id="username_input" name="username_input">
             `;
             passwordField.innerHTML = `
-                <label for="password-input">Κωδικός:</label>
-                <input type="password" id="password-input" name="password-input">
+                <label for="password_input">Κωδικός:</label>
+                <input type="password" id="password_input" name="password_input">
             `;
             passwordField.hidden = false;
             break;
@@ -50,6 +50,53 @@ userType.addEventListener('change', () => {
 });
 
 submitter.addEventListener("submit", (e)=>{
-	e.preventDefault();
-	window.location.href = "starting_page.html";
-})
+	e.preventDefault(); 
+
+    const formData = new FormData(submitter);
+    const loginData = {
+        userType: userType.value,
+        username: formData.get('login_input'),
+        password: formData.get('password_input')
+    };
+
+    fetch('/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(loginData)
+      })
+        .then(response => {
+            if (response.ok) {
+                console.log('Login successful');
+                window.location.href = response.url;
+            } else {
+                console.log('Login failed');
+            }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+    });
+
+    // console.log("form submitted");
+    // console.log(formData);
+
+    // const xhr = new XMLHttpRequest();
+    // xhr.open('POST', '/');
+    // xhr.send(formData);
+    // xhr.onreadystatechange = function() {
+    //     if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+    //       // Successful response
+    //       const response = JSON.parse(xhr.responseText);
+          
+    //       // Redirect the user based on the response
+    //       if (response.success) {
+    //         window.location.href = response.redirectTo;
+    //       } else {
+    //         // Handle unsuccessful login
+    //         alert('Login failed. Please try again.');
+    //       }
+    //     }
+    // };
+    
+});
