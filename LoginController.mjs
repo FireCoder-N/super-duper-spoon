@@ -1,12 +1,13 @@
 export const loginController = (req, res) => {
     const { userType, loginInput, passwordInput } = req.body;
-    // console.log(req.body);
   
     if (userType === 'level_1') { // Level 1 login logic for clients (name based login)
         const pattern = /^[a-zA-Zα-ωΑ-ΩάέήίϊΐόύϋΰώΆΈΉΊΪΌΎΫΏ\s]+$/;
-        // const pattern = /^[A-ZΑ-ΩΆΈΉΊΌΎΏ][a-zA-ZΑ-Ωα-ωάέήίϊΐόύϋΰώΆΈΉΊΪΌΎΫΏ]+\s[A-ZΑ-ΩΆΈΉΊΌΎΏ][a-zA-ZΑ-Ωα-ωάέήίϊΐόύϋΰώΆΈΉΊΪΌΎΫΏ]+$/;
+        // const pattern = /[A-ZΑ-ΩΆΈΉΊΌΎΏ]([a-zA-ZΑ-Ωα-ωάέήίϊΐόύϋΰώΆΈΉΊΪΌΎΫΏ])+\s[A-ZΑ-ΩΆΈΉΊΌΎΏ]([a-zA-ZΑ-Ωα-ωάέήίϊΐόύϋΰώΆΈΉΊΪΌΎΫΏ])+/;
         if (pattern.test(loginInput)) {
+            req.session.user = req.body;
             res.redirect('/home');
+            // console.log(req.session);
         } else {
             res.redirect('/');
         }
@@ -30,9 +31,9 @@ export const loginController = (req, res) => {
 };
 
 export const checkAuth = (req, res, next) => {
-    if (!req.session.user_id) {
+    if (!req.session.user) {
         res.redirect('/');
-        return next();
+    } else {
+        next();
     }
-    next();
 }

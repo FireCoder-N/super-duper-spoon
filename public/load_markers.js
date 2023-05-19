@@ -10,11 +10,11 @@ class marker{
 }
 
 const markers = [
-    new marker("m-1", 0.92, 0.75, "level -1 (parking)"),
-    new marker("m0", 0.87, 0.355, "level 0 (entrance)"),
-    new marker("m1", 0.75, 0.535, "level 1"),
-    new marker("m2", 0.65, 0.5, "level 2"),
-    new marker("m3", 0.55, 0.47, "level 3"),
+    new marker("m-1", 0.92, 0.75, "επίπεδο -1 (parking)"),
+    new marker("m0", 0.87, 0.355, "επίπεδο 0 (είσοδος)"),
+    new marker("m1", 0.75, 0.535, "επίπεδο 1"),
+    new marker("m2", 0.65, 0.5, "επίπεδο 2"),
+    new marker("m3", 0.55, 0.47, "επίπεδο 3"),
 ];
 
 
@@ -30,6 +30,7 @@ window.addEventListener("DOMContentLoaded", () => {
             window.location.href = "/floorplan?f=" + m.id.substring(1);
         });
         marker.addEventListener("mouseover", () => {
+            marker.style.cursor = "pointer";
             toast = Toastify({
                 text: m.description,
                 duration: 100000,

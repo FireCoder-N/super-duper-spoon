@@ -26,7 +26,7 @@ app.use(session({
     secret: 'your-secret-key',
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: false }
+    cookie: { maxAge: 15*60*1000, secure: false }
 }));
 
 app.use(router); // load the router
@@ -36,8 +36,8 @@ app.use(notFound); // error 404-not found
 // Define routes
 router.route('/').get(login);
 router.route('/').post(loginController);
-router.route('/home').get(homepage);
-router.route('/floorplan').get(floorplan);
+router.route('/home').get(checkAuth, homepage);
+router.route('/floorplan').get(checkAuth, floorplan);
 
 // ---------------------------------------------
 // Define the route handlers

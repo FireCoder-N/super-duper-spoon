@@ -12,7 +12,7 @@ userType.value = 'level_1';
 
 loginField.innerHTML = `
     <label for="login_input">Ονοματεπώνυμο:</label>
-    <input type="text" id="login_input" name="login_input">
+    <input type="text" id="login_input" name="login_input" autocomplete="off">
 `;
 
 // Add event listener to permission level dropdown
@@ -22,25 +22,25 @@ userType.addEventListener('change', () => {
         case 'level_1':
             loginField.innerHTML = `
                 <label for="login_input">Ονοματεπώνυμο:</label>
-                <input type="text" id="login_input" name="login_input">
+                <input type="text" id="login_input" name="login_input" autocomplete="off">
             `;
             passwordField.hidden = true;
             break;
         case 'level_2':
             loginField.innerHTML = `
                 <label for="login_input">Αριθμός Μητρώου:</label>
-                <input type="text" id="login_input" name="login_input">
+                <input type="text" id="login_input" name="login_input" autocomplete="off">
             `;
             passwordField.hidden = true;
             break;
         case 'level_3':
             loginField.innerHTML = `
                 <label for="username_input">Αριθμός Μητρώου:</label>
-                <input type="text" id="username_input" name="username_input">
+                <input type="text" id="username_input" name="username_input" autocomplete="off">
             `;
             passwordField.innerHTML = `
                 <label for="password_input">Κωδικός:</label>
-                <input type="password" id="password_input" name="password_input">
+                <input type="password" id="password_input" name="password_input" autocomplete="off">
             `;
             passwordField.hidden = false;
             break;
@@ -76,27 +76,5 @@ submitter.addEventListener("submit", (e)=>{
         })
         .catch(error => {
           console.error('Error:', error);
-    });
-
-    // console.log("form submitted");
-    // console.log(formData);
-
-    // const xhr = new XMLHttpRequest();
-    // xhr.open('POST', '/');
-    // xhr.send(formData);
-    // xhr.onreadystatechange = function() {
-    //     if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-    //       // Successful response
-    //       const response = JSON.parse(xhr.responseText);
-          
-    //       // Redirect the user based on the response
-    //       if (response.success) {
-    //         window.location.href = response.redirectTo;
-    //       } else {
-    //         // Handle unsuccessful login
-    //         alert('Login failed. Please try again.');
-    //       }
-    //     }
-    // };
-    
+    });    
 });
