@@ -153,7 +153,19 @@ function loadAmenities(level) {
         amenity.className = "clickable";
         amenity.id = a.id;
         amenity.addEventListener("click", () => {
-
+            fetch('/floorplan', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({id: a.id, level: level})
+              })
+                .then(response => {
+                    if (response.ok) window.location.href = response.url;
+                })
+                .catch(error => {
+                  console.error('Error:', error);
+            });
         });
 
         // style
@@ -183,14 +195,25 @@ function loadMarkers(level) {
         marker.id = b.id;
         let toast;
         marker.addEventListener("click", () => {
-            console.log(b.id);
-            // window.location.href = b.id + ".html";
+            fetch('/floorplan', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({id: b.id, level: level})
+              })
+                .then(response => {
+                    if (response.ok) window.location.href = response.url;
+                })
+                .catch(error => {
+                  console.error('Error:', error);
+            });
         });
         marker.addEventListener("mouseover", () => {
             marker.style.cursor = "pointer";
             toast = Toastify({
                 text: b.description,
-                duration: 100000,
+                duration: -1,
                 gravity: "bottom",
                 style: {
                     background: "#3f454f",

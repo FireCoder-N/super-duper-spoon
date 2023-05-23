@@ -36,7 +36,7 @@ userType.addEventListener('change', () => {
         case 'level_3':
             loginField.innerHTML = `
                 <label for="username_input">Αριθμός Μητρώου:</label>
-                <input type="text" id="username_input" name="username_input" autocomplete="off">
+                <input type="text" id="username_input" name="login_input" autocomplete="off">
             `;
             passwordField.innerHTML = `
                 <label for="password_input">Κωδικός:</label>
@@ -76,5 +76,5 @@ submitter.addEventListener("submit", (e)=>{
         })
         .catch(error => {
           console.error('Error:', error);
-    });    
+    });
 });

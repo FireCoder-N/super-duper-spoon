@@ -4,6 +4,7 @@ import session from 'express-session'
 // Handlebars (https://www.npmjs.com/package/express-handlebars)
 import { engine } from 'express-handlebars'
 import { loginController, checkAuth } from './LoginController.mjs'
+import { formController, uploadToDB } from './FormController.mjs'
 
 const app = express()
 const router = express.Router();
@@ -38,6 +39,9 @@ router.route('/').get(login);
 router.route('/').post(loginController);
 router.route('/home').get(checkAuth, homepage);
 router.route('/floorplan').get(checkAuth, floorplan);
+router.route('/floorplan').post(formController);
+router.route('/form').get(checkAuth, form);
+// router.route('/form').post(uploadToDB);
 
 // ---------------------------------------------
 // Define the route handlers
@@ -50,7 +54,7 @@ function floorplan(req, res) {
     const pattern = /^(-1|[0-3])$/;
 
     if (!f) 
-        res.redirect('/');
+        res.redirect('/home');
     else if (!pattern.test(f)) 
         badRequest(req, res);
     else
@@ -59,6 +63,15 @@ function floorplan(req, res) {
 
 function login(req, res) {
     res.render('login');
+}
+
+function form(req, res) {
+    if (!req.session.formaccess){
+        forbidden(req, res);
+    }
+    else {
+        res.render('form');
+    }
 }
 
 // ---------------------------------------------
@@ -72,6 +85,12 @@ function notFound(req, res) {
 function badRequest(req, res) {
     const error = new Error('Μη έγκυρο αίτημα');
     error.status = 400;
+    res.render('error', {code: error.status, message: error.message});
+}
+
+function forbidden(req, res) {
+    const error = new Error('Απαγορευμένη πρόσβαση');
+    error.status = 403;
     res.render('error', {code: error.status, message: error.message});
 }
 

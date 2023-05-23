@@ -33,7 +33,7 @@ window.addEventListener("DOMContentLoaded", () => {
             marker.style.cursor = "pointer";
             toast = Toastify({
                 text: m.description,
-                duration: 100000,
+                duration: -1,
                 gravity: "bottom",
                 style: {
                     background: "#3f454f",
