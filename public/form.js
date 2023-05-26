@@ -6,6 +6,7 @@ const radLabel = document.getElementById('radio_label');
 const otherInput = document.getElementById('oth_inp');
 const cBox = document.getElementById('comment_box');
 const check = document.getElementById('TaC');
+const checkbox = document.getElementById('myCheckbox');
 
 const next = document.getElementById('front');
 const prev = document.getElementById('back');
@@ -79,6 +80,18 @@ problemType.addEventListener('change', () => {
 			q.className = "radio";
 			q.name = "radio";
 			q.id = ""+i;
+			q.value = ""+i;
+			q.addEventListener('click', () => {
+				next.removeAttribute("disabled");
+				next.removeEventListener("mouseover", hover);
+				next.style.cursor = "pointer";
+				if (q.value == "Άλλο"){
+					otherInput.hidden = false;
+				}
+				else{
+					otherInput.hidden = true;
+				}
+			});
 			t.appendChild(q);
 			
 			const p = document.createElement("label");
@@ -109,6 +122,18 @@ problemType.addEventListener('change', () => {
 			q.className = "radio";
 			q.name = "radio";
 			q.id = ""+i;
+			q.value = ""+i;
+			q.addEventListener('click', () => {
+				next.removeAttribute("disabled");
+				next.removeEventListener("mouseover", hover);
+				next.style.cursor = "pointer";
+				if (q.value == "Άλλο"){
+					otherInput.hidden = false;
+				}
+				else{
+					otherInput.hidden = true;
+				}
+			});
 			t.appendChild(q);
 			
 			const p = document.createElement("label");
@@ -139,6 +164,18 @@ problemType.addEventListener('change', () => {
 			q.className = "radio";
 			q.name = "radio";
 			q.id = ""+i;
+			q.value = ""+i;
+			q.addEventListener('click', () => {
+				next.removeAttribute("disabled");
+				next.removeEventListener("mouseover", hover);
+				next.style.cursor = "pointer";
+				if (q.value == "Άλλο"){
+					otherInput.hidden = false;
+				}
+				else{
+					otherInput.hidden = true;
+				}
+			});
 			t.appendChild(q);
 			
 			const p = document.createElement("label");
@@ -163,10 +200,10 @@ problemType.addEventListener('change', () => {
       break;
   }
   
-	let other = document.getElementById('Άλλο');
-	other.addEventListener('click',() => {
-	otherInput.hidden = false;
-	})
+	// let other = document.getElementById('Άλλο');
+	// other.addEventListener('click',() => {
+	// otherInput.hidden = false;
+	// })
 });
 
 prev.addEventListener('click', () => {
@@ -189,18 +226,39 @@ next.addEventListener('click', () => {
 	check.hidden = false;
 })
 
+next.addEventListener('mouseover', hover);
+
+function hover(event){
+	event.target.style.cursor = "not-allowed";
+}
+
+// checkbox.addEventListener('change', () => {
+// 	if (this.checked){
+// 		console.log("yes")
+// 	}
+// 	else{
+// 		console.log('no')
+// 	}
+// });
+
+// =============== Submit ===============
 finish.addEventListener('click', () => {
+	if (!checkbox.checked){
+		alert('Θα πρέπει να αποδεχτείτε τους όρους και προϋποθέσεις πρωτού συνεχίσετε στην υποβολή')
+	}
 	let specifics;
 	if (problemType.value === "other"){
 		specifics = "";
 	}
-	//todo: specifics = radio button selection or other text contents
-	// else if () {
-
-	// }
+	else {
+		specifics = document.querySelector('input[name="radio"]:checked').value;
+		if (specifics === "Άλλο"){
+			specifics = otherInput.value;
+		}
+	}
 	const submit = {
 		type : problemType.value,
-		specifics: specifics, //TODO: add radiobutton selection or text from box
+		specifics: specifics,
 		comment: cBox.value,
 		date: new Date()
 	};

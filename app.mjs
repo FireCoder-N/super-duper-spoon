@@ -5,6 +5,7 @@ import session from 'express-session'
 import { engine } from 'express-handlebars'
 import { loginController, checkAuth } from './LoginController.mjs'
 import { formController, uploadToDB } from './FormController.mjs'
+import {connectDb, getDb} from "./mongodb/db.mjs"
 
 const app = express()
 const router = express.Router();
@@ -94,6 +95,16 @@ function forbidden(req, res) {
     res.render('error', {code: error.status, message: error.message});
 }
 
+connectDb((err) => {
+	if(!err) {
+		app.listen(3001, () => {
+			console.log(`http://127.0.0.1:${port}`);
+		});
+		db = getDb();
+	}
+    else {
+        console.log(err);
+    }
+});
 
-
-const server = app.listen(port, () => { console.log(`http://127.0.0.1:${port}`) });
+// const server = app.listen(port, () => { console.log(`http://127.0.0.1:${port}`) });

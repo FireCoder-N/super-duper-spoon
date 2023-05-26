@@ -61,7 +61,8 @@ window.addEventListener("resize", () => {
     const container_dim = document.querySelector("#main").getBoundingClientRect();
 
     for (let m of markers) {
-        const marker = document.querySelector("#" + m.id);
+        // const marker = document.querySelector("#" + m.id);
+        const marker = document.getElementById(m.id);
         marker.style.width = 70 / ratio + 'px';
         marker.style.height = 70 / ratio + 'px';
         marker.style.right = container_dim.width*m.right + 'px';

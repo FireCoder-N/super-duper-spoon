@@ -1,3 +1,21 @@
-.main {
+#errormain{
+	display: flex;
+	justify-content: center;
+	position: relative;
     flex-direction: column;
+}
+
+#errorheader {
+    margin: 0px;
+    color: white;
+}
+
+#errorsub {
+    margin: 0px;
+    color: white;
+}
+
+#errorbot {
+    width: 362px;
+    height: 300px;
 }

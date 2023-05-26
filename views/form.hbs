@@ -21,29 +21,28 @@
         <div id="spec">
         </div>
         <div id="other_description">
-            <textarea maxlength="50" cols="40" id="oth_inp" hidden placeholder="Παρακαλώ περιγράψτε  σύντομα το πρόβλημά σας.">
-            </textarea>
+            <textarea maxlength="50" cols="40" id="oth_inp" hidden placeholder="Παρακαλώ περιγράψτε σύντομα το πρόβλημά σας."></textarea>
         </div>
     </div>
     <div id="comments">
-        <textarea id="comment_box" hidden placeholder="Παρακαλώ προσθέστε άλλα σχόλια, αν υπάρχουν, εδώ.">
-        </textarea>
+        <textarea id="comment_box" hidden placeholder="Παρακαλώ προσθέστε άλλα σχόλια, αν υπάρχουν, εδώ."></textarea>
     </div>
     <div id="TaC">
-        <input type="checkbox" id="check"> </input>
-        Υποβάλλοντας την παρούσα δήλωση, αποδέχεστε τους 
-        <a href="terms.html">όρους απορρήτου</a>.
+        <input type="checkbox" class="check" id="myCheckbox">
+        <label for="myCheckbox">Υποβάλλοντας την παρούσα δήλωση, αποδέχεστε τους 
+            <a href="terms.html" id="policy">όρους απορρήτου</a>.
+        </label>
     </div>
     <div id="button_cont">
     <button id="back" hidden>
         Προηγούμενο
     </button>
-    <button id="front">
+    <button id="front" disabled>
         Επόμενο
     </button>
     <button type="submit" id="finish" hidden>
         Υποβολή
     </button>
     </div>
-    <script src="form.js"></script>
+    <script src="form.js" defer></script>
 </div>
