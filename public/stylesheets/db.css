@@ -1,0 +1,72 @@
+#DB_display {
+	display: flex;
+	flex-direction: column;
+	/* grid-auto-rows: 50px; */
+	max-height: 800px;
+	/* width: 80%; */
+	color: white;
+	background-color: #686f82;
+	/* padding-bottom: 10px; */
+	overflow: auto;
+	font-size: 15px;
+}
+
+.DBline{
+	display: grid;
+	grid-template-columns: 5% 7% 14% 10% 10% 46.5% 7.5%;
+	align-items: center;
+	border-bottom-color: #515766;
+	border-bottom-style: solid;
+	border-bottom-width: 2px;
+	border-top-color: #515766;
+	border-top-style: solid;
+	border-top-width: 2px;
+}
+
+.DBheader{
+	display: grid;
+	grid-template-columns: 5% 7% 14% 10% 10% auto 7.5%;
+	grid-gap: 3px;
+	background-color: #686f82;
+	border-bottom-color: #515766;
+	border-bottom-style: solid;
+	border-bottom-width: 2px;
+	border-top-color: #515766;
+	border-top-style: solid;
+	border-top-width: 2px;
+}
+
+.DBHcell{
+	/* justify-self: center; */
+	text-align: center;
+	background-color: #515766;
+	padding-bottom:10px;
+	padding-top:10px;
+}
+
+.DBcell{
+	text-align: center;
+	max-height: 80px;
+	overflow: auto;
+}
+
+/* #holder{
+	display: flex;
+	flex-direction: column;
+	/* grid-auto-rows: 50px; 
+	width: 80%;
+	color: white;
+	overflow: auto;
+	font-size: 15px;
+} */
+
+#delbutton {
+	border-radius: 5px;
+	margin-right: 10px;	
+	background-color: #747e90;
+	outline-color: #747e90;
+	width: 180px;
+	font-size: 16px;
+	color: white;
+	margin-top: 25px
+}	

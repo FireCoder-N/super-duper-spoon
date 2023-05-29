@@ -1,13 +1,10 @@
 export const formController = (req, res) => {
-    console.log(req.body);
+    console.log(req.body['type']);
 
     if (req.session.user) {
         req.session.formaccess = req.body;
-        res.redirect('/form');
+        res.redirect('/form?t=' + req.body['type']);
     } else {
         res.redirect('/');
     }
-};
-
-export const uploadToDB = (req, res) => {
 };

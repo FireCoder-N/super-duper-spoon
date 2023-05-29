@@ -1,8 +1,12 @@
-export const loginController = (req, res) => {
+import { findStaff } from "./db_controllers/findstaff.mjs";
+import { findAdmin} from "./db_controllers/findadmin.mjs";
+import crypto from 'crypto';
+
+export const loginController = async (req, res) => {
     const { userType, username, password } = req.body;
-    //!TEST:
-    const admin = { username: 'admin', password: 'admin' };
-    const staff = { id: '12345'};
+
+    const hash = crypto.createHash('sha256');
+    hash.update(password);
 
     console.log(req.body);
   
@@ -16,7 +20,8 @@ export const loginController = (req, res) => {
     }
     else if (userType === 'level_2') { 
         //* Level 2 login logic for staff (ID and password-based login)
-        if (username === staff.id) {
+        const valid = await findStaff(username);
+        if (valid) {
             req.session.user = req.body;
             res.redirect('/home'); //TODO staff-page
 
@@ -25,9 +30,11 @@ export const loginController = (req, res) => {
     }
     else if (userType === 'level_3') {
         //* Level 3 login logic for admins (ID and password-based login)
-        if (username === admin.username && password === admin.password) {
+        const valid = await findAdmin(username, hash.digest('hex'));
+        if (valid) {
             req.session.user = req.body;
-            res.redirect('/home'); //TODO admin-page
+            req.session.admin = true;
+            res.redirect('/submissions'); //TODO admin-page
 
         } else res.redirect('/');
     }
@@ -39,6 +46,14 @@ export const loginController = (req, res) => {
 
 export const checkAuth = (req, res, next) => {
     if (!req.session.user) {
+        res.redirect('/');
+    } else {
+        next();
+    }
+}
+
+export const adminAuth = (req, res, next) => {
+    if (!req.session.admin){
         res.redirect('/');
     } else {
         next();

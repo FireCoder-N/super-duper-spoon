@@ -12,30 +12,32 @@ class brand {
 }
 
 class amenity{
-    constructor(id, top, right, src) {
+    constructor(id, top, right, description, type, src) {
         this.id = id;
         this.top = top;
         this.right = right;
+        this.description = description;
+        this.type = type;
         this.src = src;
     }
 }
 
 const amenities = [
-    new amenity("right_stair", 0.26, 0.21, "images/amenities/stairs.png"),
-    new amenity("left_stair", 0.26, 0.75, "images/amenities/stairs.png"),
-    new amenity("right_elevator", 0.26, 0.185, "images/amenities/lift.png"),
-    new amenity("left_elevator", 0.26, 0.775, "images/amenities/lift.png"),
-    new amenity("wc1", 0.26, 0.367, "images/amenities/wc.png"),
-    new amenity("wc2", 0.95, 0.625, "images/amenities/wc.png"),
-    new amenity("atm", 0.26, 0.6, "images/amenities/atm.png"),
+    new amenity("es1", 0.26, 0.21, "Κυλιόμενες Σκάλες Δεξιά", 2, "images/amenities/stairs.png"),
+    new amenity("es2", 0.26, 0.75, "Κυλιόμενες Σκάλες Αριστερά", 2, "images/amenities/stairs.png"),
+    new amenity("el1", 0.26, 0.185, "Ανελκυστήρας δεξιά", 1, "images/amenities/lift.png"),
+    new amenity("el2", 0.26, 0.775, "Ανελκυστήρας αριστερά", 1, "images/amenities/lift.png"),
+    new amenity("wc1", 0.26, 0.367, "Τουαλέτες 1", 4, "images/amenities/wc.png"),
+    new amenity("wc2", 0.95, 0.625, "Τουαλέτες 2", 4,"images/amenities/wc.png"),
+    new amenity("at", 0.26, 0.6, "Μηχάνημα Αυτόματης Ανάληψης", 3, "images/amenities/atm.png"),
 ];
 
 const brands = [
     [
-        new brand("A", 0.6, 0.7, 60, "Parking Τομέας Α"),
-        new brand("B", 0.6, 0.465, 60, "Parking Τομέας Β"),
-        new brand("C", 0.6, 0.25, 60, "Parking Τομέας Γ"),
-        new brand("D", 0.32, 0.51, 60, "Parking Τομέας Δ"),
+        new brand("bc1p", 0.6, 0.7, 60, "Parking Τομέας Α"),
+        new brand("bc2p", 0.6, 0.465, 60, "Parking Τομέας Β"),
+        new brand("bc3p", 0.6, 0.25, 60, "Parking Τομέας Γ"),
+        new brand("bc4p", 0.32, 0.51, 60, "Parking Τομέας Δ"),
     ],
     [
         new brand("b01a", 0.6, 0.2, 60, "Burberry"),
@@ -137,27 +139,31 @@ const brands = [
     ]
 ];
 
-
+const floorsaplha = ['a', 'b', 'c', 'd'];
 
 
 
 function loadAmenities(level) {
     for (let a of amenities) {
 
-        if (a.id === "atm" && level % 2 !== 0) continue;
+        if (a.id === "at" && level % 2 !== 0) continue;
         if (/^wc/.test(a.id) && level === -1) continue;
 
         const amenity = document.createElement("img");
         amenity.src = a.src;
         amenity.className = "clickable";
         amenity.id = a.id;
+        if (/^wc/.test(a.id) || /^es/.test(a.id) || /^at/.test(a.id)){
+            amenity.id += floorsaplha[level];
+        }
+        let toast1;
         amenity.addEventListener("click", () => {
             fetch('/floorplan', {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({id: a.id, level: level})
+                body: JSON.stringify({id: a.id, level: level, type: a.type})
               })
                 .then(response => {
                     if (response.ok) window.location.href = response.url;
@@ -166,15 +172,31 @@ function loadAmenities(level) {
                   console.error('Error:', error);
             });
         });
+        amenity.addEventListener("mouseover", () => {
+            amenity.style.cursor = "pointer";
+            toast1 = Toastify({
+                text: a.description,
+                duration: -1,
+                gravity: "bottom",
+                style: {
+                    background: "#3f454f",
+                    color: "#ff8e4c"
+                }
+            }).showToast();
+        });
+        amenity.addEventListener("mouseout", () => {
+            toast1.hideToast();
+        });
 
         // style
-        if (/^left/.test(a.id) && level === -1) amenity.style.right = (a.right-0.04)*100 + 1 + '%';
-        else if (/^right/.test(a.id) && level === -1) amenity.style.right = (a.right+0.04)*100 - 1 + '%';
+        if (/1/.test(a.id) && level === -1) amenity.style.right = (a.right+0.025)*100 + 1 + '%';
+        else if (/2/.test(a.id) && level === -1) amenity.style.right = (a.right-0.025)*100 - 1 + '%';
         else amenity.style.right = a.right*100 + '%';
 
         if (level === -1) amenity.style.top = (a.top-0.05)*100 + '%';
         else amenity.style.top = a.top*100 + '%';
 
+        amenity.style.transform = "translate(-50%, -50%)";
 
         // add element to DOM
         document.querySelector("#main").appendChild(amenity);
@@ -184,11 +206,14 @@ function loadAmenities(level) {
 function loadMarkers(level) {
     for (let b of brands[level+1]) {
         const marker = document.createElement("img");
+        let type;
         if (level === -1 || b.id.substring(0,2) === "bc") {
             marker.src = "images/misc/logo_transparent.png";
+            type = 5;
         }
         else {
             marker.src = "images/floor/" + level + "/" + b.id.slice(1,-1) + ".png";
+            type = 0;
         }
         marker.className = "clickable";
         marker.id = b.id;
@@ -199,7 +224,7 @@ function loadMarkers(level) {
                 headers: {
                   'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({id: b.id, level: level})
+                body: JSON.stringify({id: b.id, level: level, type: type})
               })
                 .then(response => {
                     if (response.ok) window.location.href = response.url;
@@ -242,7 +267,7 @@ function loadMarkers(level) {
         // add element to DOM
         document.querySelector("#main").appendChild(marker);
     }
-    // loadAmenities(level);
+    loadAmenities(level);
 }
 
 
@@ -258,50 +283,16 @@ window.addEventListener("resize", () => {
     for (let b of brands[level+1]) {
         const marker = document.querySelector("#" + b.id);
         
-        // marker.style.transform = "translate(0%, 0%)";
         marker.style.right = b.right * 100 + '%';
         marker.style.top = b.top * 100 + '%';
         marker.style.width = b.size / ratio + 'px';
         marker.style.height = b.size / ratio + 'px';
-        // marker.style.right = container_dim.width*b.right + 'px';
-        // marker.style.top = container_dim.height*b.top + 'px';
-        // marker.style.transform = "translate(-50%, -50%)";
     }
 
-    for (let a of amenities) {
-        const amenity = document.querySelector("#" + a.id);
-        amenity.style.right = container_dim.width*a.right + 'px';
-        amenity.style.top = container_dim.height*a.top + 'px';
-    }
+    // for (let a of amenities) {
+    //     const amenity = document.querySelector("#" + a.id);
+    //     amenity.style.right = container_dim.width*a.right + 'px';
+    //     amenity.style.top = container_dim.height*a.top + 'px';
+    // }
 
 });
-
-// window.addEventListener("resize", () => {
-//     const currentUrl = window.location.href;
-//     const indexOfEqualSign = currentUrl.indexOf("=");
-//     const level = parseInt(currentUrl.substring(indexOfEqualSign + 1));
-
-//     const container = document.querySelector("#main");
-//     const containerWidth = container.offsetWidth;
-//     const containerHeight = container.offsetHeight;
-
-//     const backgroundWidth = 1520; // Width of the background element
-//     const backgroundHeight = 365; // Height of the background element
-
-//     const widthRatio = containerWidth / backgroundWidth;
-//     const heightRatio = containerHeight / backgroundHeight;
-
-//     const markers = brands[level + 1];
-
-//     for (let b of markers) {
-//         const marker = document.querySelector("#" + b.id);
-
-//         marker.style.width = b.size * widthRatio + 'px';
-//         marker.style.height = b.size * heightRatio + 'px';
-
-//         const offsetX = (containerWidth - backgroundWidth * widthRatio) / 2;
-//         const offsetY = (containerHeight - backgroundHeight * heightRatio) / 2;
-
-//         marker.style.transform = `translate(${b.right * containerWidth - offsetX}px, ${b.top * containerHeight - offsetY}px)`;
-//     }
-// });

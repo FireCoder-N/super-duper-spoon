@@ -83,6 +83,12 @@ body {
 	z-index: 1;
 }
 
+#terms{
+	font: 0.9em / 0.9 Arial, Helvetica, sans-serif;
+	color: #ffffff;
+	margin: 2%;
+}
+
 
 /* ------ footer ------ */
 footer {

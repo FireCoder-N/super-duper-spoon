@@ -3,7 +3,7 @@ import {MongoClient} from 'mongodb'
 let dbConnection;
 
 export const connectDb = (funct) => {  
-	MongoClient.connect('mongodb://192.168.0.5:27017/The_Hall_Sthena').then((client) => {
+	MongoClient.connect('mongodb://127.0.0.1:27017/The_Hall_Sthena').then((client) => {
 		dbConnection = client.db();
 		return funct();
 		

@@ -9,13 +9,10 @@ window.addEventListener("resize", () => {
     document.querySelector("body").style.paddingTop = ratio * 70 + 'px';
 });
 
-
-
 // Toastify
 document.querySelector("#phone").addEventListener('click', () => {
     const phone = "+30-210-1234567";
-    navigator.clipboard.writeText(phone);
-
+    
     Toastify({
         text: "Phone copied to clipboard!",
         duration: 2000, //time in ms
@@ -26,11 +23,12 @@ document.querySelector("#phone").addEventListener('click', () => {
         }
     }).showToast();
 
+    navigator.clipboard.writeText(phone);
+
 });
 
 document.querySelector("#email").addEventListener('click', () => {
     const email = "thehall.sthena@gmail.com";
-    navigator.clipboard.writeText(email);
 
     Toastify({
         text: "Email copied to clipboard!",
@@ -42,10 +40,12 @@ document.querySelector("#email").addEventListener('click', () => {
         }
     }).showToast();
 
+    navigator.clipboard.writeText(email);
+
 });
 
 document.querySelector("#facebook").addEventListener('click', () => {
-        window.open('https://www.facebook.com/profile.php?id=100091574676795');
+    window.open('https://www.facebook.com/profile.php?id=100091574676795');
 
     Toastify({
         text: "Facebook page opened in new tab!",

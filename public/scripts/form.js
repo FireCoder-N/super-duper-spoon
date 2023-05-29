@@ -16,27 +16,50 @@ const eOpt = document.getElementById('eOption');
 const pOpt = document.getElementById('pOption');
 const sOpt = document.getElementById('sOption');
 const plOpt = document.getElementById('plOption');
-//const other = document.getElementById('Άλλο');
 
-const elProb = [["Φωτισμός","Κλιματισμός","Διακόσμηση","Άλλο"],["a","b","c","Άλλο"],["a","b","c","Άλλο"],[]];
-const plumProb = [["Σουλήνες","Σωλήνες","Σλήν'ς","Σωλήν ο μείζων","Σωλήν ο ελάσσων","Άλλο"],[],["a","b","c","Άλλο"],["a","b","c","Άλλο"]];
-const arcProb = [["Γκρεμίζεται","το μαγαζί","κι εμείς","γελάμε","σαν χαζοί","Άλλο"],["a","b","c","Άλλο"],[],[]];
 
-let pgTypeGlobal = 0;
+//μαγαζιά, ανελκυστήρες, σκάλες, atm, wc, διάδρομοι
+const elProb = [["Φωτισμός","Κλιματισμός","Διακόσμηση","Άλλο"],
+				["Φωτισμός","Κλήση ανελκυστήρα","Ανάβαση/Κατάβαση","Λειτουργία κομβίων","Λειτουργία θυρών","Άλλο"],
+				["Ανάβαση/Κατάβαση","Φωτεινές σημάνσεις","Άλλο"],
+				["Προβολή οθόνης","Λειτουργία πλήκτρων","Λειτουργία αφής","Εισαγωγή/Εξαγωγή κάρτας","Άλλο"],
+				["Φωτισμός","Στεγνωντήριο χεριών","Δοχείο χαρτιού","Άλλο"],
+				["Φωτισμός","Άλλο"]];
+const plumProb = [["Προβλήμα βεστιαρίου","Τυχαία συσσώρευση νερού στον χώρο","Διακοπή παροχής","Άλλο"],
+				  [],[],[],
+				  ["Διαρροή λεκάνης", "Διαρροή στομίου βρύσης", "Τυχαία συσσώρευση νερού στον χώρο", "Διακοπή παροχής", "Αποχέτευση","Άλλο"],
+				  ["Τυχαία συσσώρευση νερού στον χώρο","Άλλο"]];
+const arcProb = [["Ρωγμές στην κατασκευή","Καθιζήσεις δαπέδου","Καθιζήσεις οροφής","Γύμνωση σωληνώσεων/καλωδίων","Άλλο"],
+				 ["Αφύσικη κλίση θαλάμου","Ευθυγράμμιση θυρών","Κλονισμός θαλάμου","Ζημιές σε τοιχώματα θαλάμου","Άλλο"],
+				 ["Ζημιές σε σκαλοπάτια", "Φθορές ιμάντα υποβραχιονίου", "Άλλο"],
+				 ["Υλικές φθορές οθόνης","Φθορές επί των πλήκτρων","Άλλο"],
+				 ["Ρωγμές στην κατασκευή","Καθιζήσεις δαπέδου","Καθιζήσεις οροφής","Γύμνωση σωληνώσεων/καλωδίων","Άλλο"],
+				 ["Ρωγμές στην κατασκευή","Καθιζήσεις δαπέδου","Καθιζήσεις οροφής","Γύμνωση σωληνώσεων/καλωδίων","Άλλο"]];
 
+const currentUrl = window.location.href;
+const indexOfEqualSign = currentUrl.indexOf("=");
+const pgTypeGlobal = parseInt(currentUrl.substring(indexOfEqualSign + 1));
 
 switch(pgTypeGlobal){
+
 	case(1):
 		pOpt.hidden = true;
 		break;
 	case(2):
-		sOpt.hidden = true;
+		pOpt.hidden = true;
 		break;
 	case(3):
-		eOpt.hidden = true;
-		sOpt.hidden = true;
+		pOpt.hidden = true;
+		break;
+	default:
+		pOpt.hidden = false;
+		sOpt.hidden = false;
+		eOpt.hidden = false;
+		break;
 	}
 
+
+next.style.cursor = "not-allowed";
 
 problemType.addEventListener('click', () => {
 	plOpt.hidden = true;
@@ -55,12 +78,13 @@ window.addEventListener('load', () => {
 	form_body.style.display = "flex";
 	form_body.style.justifyContent = "center";
 	form_body.style.alignContent = "center";
-
 })
 
 problemType.addEventListener('change', () => {
 	otherInput.hidden = true;
 	specProblem.innerHTML="";
+	next.style.cursor = 'not-allowed';
+	next.setAttribute("disabled", "disabled");
 
   switch (problemType.value) {
     case 'electronics':
@@ -83,7 +107,6 @@ problemType.addEventListener('change', () => {
 			q.value = ""+i;
 			q.addEventListener('click', () => {
 				next.removeAttribute("disabled");
-				next.removeEventListener("mouseover", hover);
 				next.style.cursor = "pointer";
 				if (q.value == "Άλλο"){
 					otherInput.hidden = false;
@@ -103,7 +126,6 @@ problemType.addEventListener('change', () => {
 			p.style.margin = 0 + 'px';
 		}
       break;
-	  
 	  
     case 'plumbing':
 		specProblem.hidden=false;
@@ -125,7 +147,6 @@ problemType.addEventListener('change', () => {
 			q.value = ""+i;
 			q.addEventListener('click', () => {
 				next.removeAttribute("disabled");
-				next.removeEventListener("mouseover", hover);
 				next.style.cursor = "pointer";
 				if (q.value == "Άλλο"){
 					otherInput.hidden = false;
@@ -145,7 +166,6 @@ problemType.addEventListener('change', () => {
 			p.style.margin = 0 + 'px';
 		}
       break;
-	  
 	  
     case 'structural':
 		specProblem.hidden=false;
@@ -167,7 +187,6 @@ problemType.addEventListener('change', () => {
 			q.value = ""+i;
 			q.addEventListener('click', () => {
 				next.removeAttribute("disabled");
-				next.removeEventListener("mouseover", hover);
 				next.style.cursor = "pointer";
 				if (q.value == "Άλλο"){
 					otherInput.hidden = false;
@@ -188,11 +207,12 @@ problemType.addEventListener('change', () => {
 		}
       break;
 	  
-	  
 	case 'other':
 		radLabel.hidden = true;
 		cBox.hidden = false;
 		cBox.placeholder = "Παρακαλώ εξηγήστε μας το πρόβλημά σας."
+		next.removeAttribute("disabled");
+		next.style.cursor = "pointer";
 		break;
 		
 		
@@ -200,10 +220,6 @@ problemType.addEventListener('change', () => {
       break;
   }
   
-	// let other = document.getElementById('Άλλο');
-	// other.addEventListener('click',() => {
-	// otherInput.hidden = false;
-	// })
 });
 
 prev.addEventListener('click', () => {
@@ -226,41 +242,53 @@ next.addEventListener('click', () => {
 	check.hidden = false;
 })
 
-next.addEventListener('mouseover', hover);
-
-function hover(event){
-	event.target.style.cursor = "not-allowed";
-}
-
-// checkbox.addEventListener('change', () => {
-// 	if (this.checked){
-// 		console.log("yes")
-// 	}
-// 	else{
-// 		console.log('no')
-// 	}
-// });
-
 // =============== Submit ===============
 finish.addEventListener('click', () => {
 	if (!checkbox.checked){
-		alert('Θα πρέπει να αποδεχτείτε τους όρους και προϋποθέσεις πρωτού συνεχίσετε στην υποβολή')
+		// alert('Θα πρέπει να αποδεχτείτε τους όρους και προϋποθέσεις πρωτού συνεχίσετε στην υποβολή')
+		Swal.fire(
+			'Σφάλμα',
+			'Θα πρέπει να αποδεχτείτε τους όρους και προϋποθέσεις πρωτού συνεχίσετε στην υποβολή',
+			'error'
+		)
 	}
-	let specifics;
-	if (problemType.value === "other"){
-		specifics = "";
-	}
-	else {
-		specifics = document.querySelector('input[name="radio"]:checked').value;
-		if (specifics === "Άλλο"){
-			specifics = otherInput.value;
+	else{
+		let specifics;
+		if (problemType.value === "other"){
+			specifics = "";
 		}
+		else {
+			specifics = document.querySelector('input[name="radio"]:checked').value;
+			if (specifics === "Άλλο"){
+				specifics = otherInput.value;
+			}
+		}
+		const submit = {
+			type : problemType.value,
+			specifics: specifics,
+			comment: cBox.value,
+			date: new Date()
+		};
+
+		console.log(submit);
+
+		fetch('/form', {
+			method: 'POST',
+			headers: {
+			  'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(submit)
+		  })
+			.then(response => {
+				if (response.ok) window.location.href = response.url;
+			})
+			.catch(error => {
+			  console.error('Error:', error);
+		});
+		Swal.fire(
+			'Επιτυχία',
+			'Η αίτησή σας υποβλήθηκε, ευχαριστούμε',
+			'success'
+		)
 	}
-	const submit = {
-		type : problemType.value,
-		specifics: specifics,
-		comment: cBox.value,
-		date: new Date()
-	};
-	console.log(submit);
 })
