@@ -6,7 +6,7 @@ This is a GitHub repository for the university of Patras (department of electric
 Our project is a full-stack website titled "Technical Problem Report Platform". We have chosen to create a website for a shopping mall where users can report technical issues they have encountered, and the mall staff can address them. The website is intended for use by users of various groups, such as customers and shopping mall staff .
 
 
-![Mall exterior](https://raw.githubusercontent.com/FireCoder-N/super-duper-spoon/ONA/building%20exterior.png)
+![Mall exterior](https://raw.githubusercontent.com/FireCoder-N/the-hall-Sthena/main/public/images/building%20exterior.png)
 *Image source: https://www.hs3dindia.com/ (edited)*
 
 ## User Cases and Privileges
@@ -15,7 +15,7 @@ Our website will have three types of users: customers, staff and administrators.
 
 ## Logo
 
-![Logo](https://raw.githubusercontent.com/FireCoder-N/super-duper-spoon/ONA/logo.png)
+![Logo](https://raw.githubusercontent.com/FireCoder-N/the-hall-Sthena/main/public/images/misc/logo.png)
 *Logo is created using the website www.freelogodesign.org*
   
 
